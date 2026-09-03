@@ -1,0 +1,17 @@
+{% assign icon_key = include.key | default: 'default' %}
+{% case icon_key %}
+  {% when 'home' %}
+    <svg viewBox="0 0 24 24"><path d="M3.5 11.2 12 4l8.5 7.2"/><path d="M5.5 10.5V20h13v-9.5M9.5 20v-5.5h5V20"/></svg>
+  {% when 'library' %}
+    <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15A2.5 2.5 0 0 1 6.5 18H20"/><path d="M8 7h8M8 11h7"/></svg>
+  {% when 'topics' %}
+    <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.9 7.1l8 .7M7.3 7.8l3.6 8.2M16.8 8.8l-3.6 7.2"/></svg>
+  {% when 'projects' %}
+    <svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="7" height="7" rx="1.5"/><rect x="13.5" y="4" width="7" height="7" rx="1.5"/><rect x="3.5" y="14" width="7" height="6" rx="1.5"/><path d="M14 17h6M17 14v6"/></svg>
+  {% when 'archive' %}
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.4 2M4.5 4.5 7 7"/></svg>
+  {% when 'about' %}
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 10.5v6M12 7.3h.01"/></svg>
+  {% else %}
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+{% endcase %}

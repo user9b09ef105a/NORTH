@@ -1,0 +1,66 @@
+{% assign post = include.post %}
+{% assign words = post.content | number_of_words %}
+{% assign minutes = words | divided_by: 220 | plus: 1 %}
+{% assign card_summary = post.summary | default: post.excerpt %}
+{% assign card_summary_clean = card_summary | strip_html | normalize_whitespace %}
+<article class="library-card"
+  data-library-item
+  data-lang-entry="{{ post.lang | default: site.default_lang }}"
+  data-domain="{{ post.domain | default: site.content_defaults.domain }}"
+  data-nature="{{ post.nature | default: site.content_defaults.nature }}"
+  data-kind="{{ post.kind | default: 'post' }}"
+  data-media="{{ post.media_type | default: site.content_defaults.media_type }}"
+  data-date="{{ post.date | date_to_xmlschema }}"
+  data-title="{{ post.title | escape }}"
+  data-tags="{{ post.tags | join: ' ' | escape }}"
+  data-search="{{ post.title | append: ' ' | append: card_summary_clean | append: ' ' | append: post.tags | append: ' ' | append: post.domain | append: ' ' | append: post.nature | append: ' ' | append: post.kind | append: ' ' | append: post.media_type | normalize_whitespace | escape }}"
+  dir="{% if post.lang == 'fa' %}rtl{% else %}ltr{% endif %}">
+
+  {% if post.image %}
+    <a class="library-card-media" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
+      <img src="{{ post.image | relative_url }}" alt="" loading="lazy" decoding="async">
+    </a>
+  {% endif %}
+
+  <div class="library-card-body">
+    <div class="library-card-top">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time>
+      <div class="library-card-status">
+        {% if post.featured %}<span class="featured-chip" data-i18n="library.featured">Featured</span>{% endif %}
+        <span class="lang-chip">{% if post.lang == 'fa' %}FA{% else %}EN{% endif %}</span>
+      </div>
+    </div>
+
+    <div class="facet-line library-card-facets">
+      <span data-domain-label="{{ post.domain | default: site.content_defaults.domain }}">{{ post.domain | default: site.content_defaults.domain }}</span>
+      <span data-nature-label="{{ post.nature | default: site.content_defaults.nature }}">{{ post.nature | default: site.content_defaults.nature }}</span>
+      <span data-kind-label="{{ post.kind | default: 'post' }}">{{ post.kind | default: 'post' }}</span>
+      <span data-media-label="{{ post.media_type | default: site.content_defaults.media_type }}">{{ post.media_type | default: site.content_defaults.media_type }}</span>
+    </div>
+
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+
+    <div class="library-card-executive">
+      <span class="library-card-executive-label" data-i18n="library.executive">Summary</span>
+      {% if card_summary_clean != '' %}
+        <p>{{ card_summary_clean | truncate: 260 }}</p>
+      {% else %}
+        <p data-i18n="library.noSummary">Open this entry for the full context, decisions, and supporting material.</p>
+      {% endif %}
+    </div>
+
+    <div class="library-card-intel" aria-label="Entry information">
+      <span><strong>{{ minutes }}</strong> <span data-i18n="post.minRead">min read</span></span>
+      {% if post.updated %}<span><span data-i18n="post.updated">updated</span> <time datetime="{{ post.updated | date_to_xmlschema }}">{{ post.updated | date: '%Y.%m.%d' }}</time></span>{% endif %}
+      {% if post.tags and post.tags.size > 0 %}<span><strong>{{ post.tags.size }}</strong> <span data-i18n="library.tagsCount">tags</span></span>{% endif %}
+    </div>
+
+    {% if post.tags and post.tags.size > 0 %}
+      <div class="tags library-card-tags">{% for tag in post.tags limit: 6 %}<span>#{{ tag }}</span>{% endfor %}</div>
+    {% endif %}
+
+    <div class="library-card-footer">
+      <a class="library-card-open" href="{{ post.url | relative_url }}"><span data-i18n="library.openEntry">Open entry</span><span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,65 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#02070b">
+  <meta name="color-scheme" content="dark light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  {% if site.project.license %}<meta name="license" content="{{ site.project.license | escape }}">{% endif %}
+
+  {% assign profile = site.data.profile %}
+  {% assign content_lang = page.lang | default: site.default_lang | default: 'en' %}
+  {% assign meta_title = page.title | default: site.title %}
+  {% if page.title and page.title != site.title %}{% assign full_title = page.title | append: ' · ' | append: site.title %}{% else %}{% assign full_title = site.title %}{% endif %}
+  {% assign default_description = profile.description_en | default: site.description %}
+  {% if content_lang == 'fa' %}{% assign default_description = profile.description_fa | default: site.description_fa %}{% endif %}
+  {% assign meta_description = page.summary | default: page.excerpt | default: default_description | strip_html | normalize_whitespace | truncate: 160 %}
+  {% assign canonical_url = page.url | absolute_url %}
+  {% assign meta_image = page.image | default: site.social_image %}
+
+  <title>{{ full_title | escape }}</title>
+  <meta name="description" content="{{ meta_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {% if page.translation_key %}
+    {% assign translation_group = site.posts | where: 'translation_key', page.translation_key %}
+    {% for translated in translation_group %}<link rel="alternate" hreflang="{{ translated.lang }}" href="{{ translated.url | absolute_url }}">{% endfor %}
+    {% assign default_translation = translation_group | where: 'lang', site.default_lang | first %}
+    {% if default_translation %}<link rel="alternate" hreflang="x-default" href="{{ default_translation.url | absolute_url }}">{% endif %}
+  {% endif %}
+
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:title" content="{{ meta_title | escape }}">
+  <meta property="og:description" content="{{ meta_description | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:locale" content="{% if content_lang == 'fa' %}fa_IR{% else %}en_US{% endif %}">
+  {% if content_lang == 'fa' %}<meta property="og:locale:alternate" content="en_US">{% else %}<meta property="og:locale:alternate" content="fa_IR">{% endif %}
+  {% if meta_image != "" %}<meta property="og:image" content="{{ meta_image | absolute_url }}">{% endif %}
+
+  <meta name="twitter:card" content="{% if meta_image != '' %}summary_large_image{% else %}summary{% endif %}">
+  <meta name="twitter:title" content="{{ meta_title | escape }}">
+  <meta name="twitter:description" content="{{ meta_description | escape }}">
+  {% if meta_image != "" %}<meta name="twitter:image" content="{{ meta_image | absolute_url }}">{% endif %}
+
+  {% if page.layout == 'post' %}
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    {% if page.updated %}<meta property="article:modified_time" content="{{ page.updated | date_to_xmlschema }}">{% endif %}
+    {% for tag in page.tags %}<meta property="article:tag" content="{{ tag | escape }}">{% endfor %}
+  {% endif %}
+
+  <link rel="icon" href="{{ '/assets/brand/north-profile.webp' | relative_url }}" type="image/webp">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }} — all" href="{{ '/feed.xml' | relative_url }}">
+  <link rel="alternate" type="application/atom+xml" hreflang="en" title="{{ site.title | escape }} — English" href="{{ '/feed-en.xml' | relative_url }}">
+  <link rel="alternate" type="application/atom+xml" hreflang="fa" title="{{ site.title | escape }} — فارسی" href="{{ '/feed-fa.xml' | relative_url }}">
+  <script>(function(){try{var t=localStorage.getItem('north-theme')||'ocean';if(t!=='ocean'&&t!=='light')t='ocean';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='ocean';}})();</script>
+  {% if page.url == '/' %}<link rel="preload" as="image" href="{{ '/assets/brand/north-banner.webp' | relative_url }}" fetchpriority="high">{% endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <script type="application/ld+json">
+  {% if page.layout == 'post' %}
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":{{ page.title | jsonify }},"description":{{ meta_description | jsonify }},"inLanguage":{{ content_lang | jsonify }},"datePublished":{{ page.date | date_to_xmlschema | jsonify }},{% if page.updated %}"dateModified":{{ page.updated | date_to_xmlschema | jsonify }},{% endif %}"author":{"@type":"Person","name":{{ profile.name | default: site.author.name | jsonify }}},"mainEntityOfPage":{{ canonical_url | jsonify }}{% if meta_image != "" %},"image":{{ meta_image | absolute_url | jsonify }}{% endif %}}
+  {% else %}
+  {"@context":"https://schema.org","@type":"WebSite","name":{{ site.title | jsonify }},"description":{{ default_description | jsonify }},"inLanguage":["en","fa"],"url":{{ '/' | absolute_url | jsonify }},"author":{"@type":"Person","name":{{ profile.name | default: site.author.name | jsonify }}}}
+  {% endif %}
+  </script>
+</head>

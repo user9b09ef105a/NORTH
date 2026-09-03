@@ -1,0 +1,34 @@
+---
+layout: default
+---
+{% assign content_lang = page.lang | default: site.default_lang %}
+<article class="article post shell" data-content-language="{{ content_lang }}" dir="{% if content_lang == 'fa' %}rtl{% else %}ltr{% endif %}">
+  <header class="article-header">
+    <div class="article-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time>
+      {% if page.kind %}<span data-kind-label="{{ page.kind }}">{{ page.kind }}</span>{% endif %}
+      {% assign words = content | number_of_words %}{% assign minutes = words | divided_by: 220 | plus: 1 %}
+      <span><b class="plain" data-reading-minutes="{{ minutes }}">{{ minutes }}</b> <i class="plain" data-i18n="post.minRead">min read</i></span>
+      {% if page.updated %}<span><i class="plain" data-i18n="post.updated">updated</i> {{ page.updated | date: '%Y.%m.%d' }}</span>{% endif %}
+      <span class="lang-chip">{% if content_lang == 'fa' %}FA{% else %}EN{% endif %}</span>
+    </div>
+    <div class="article-facets facet-line">
+      <a href="{{ '/library/' | relative_url }}?domain={{ page.domain | default: 'general' }}" data-domain-label="{{ page.domain | default: 'general' }}">{{ page.domain | default: 'general' }}</a>
+      <a href="{{ '/library/' | relative_url }}?nature={{ page.nature | default: 'analysis' }}" data-nature-label="{{ page.nature | default: 'analysis' }}">{{ page.nature | default: 'analysis' }}</a>
+      <a href="{{ '/library/' | relative_url }}?media={{ page.media_type | default: 'text' }}" data-media-label="{{ page.media_type | default: 'text' }}">{{ page.media_type | default: 'text' }}</a>
+    </div>
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.summary %}<p class="article-summary">{{ page.summary | escape }}</p>{% endif %}
+    {% if page.tags and page.tags.size > 0 %}<div class="tags article-tags">{% for tag in page.tags %}<a href="{{ '/library/' | relative_url }}?q={{ tag | url_encode }}">#{{ tag }}</a>{% endfor %}</div>{% endif %}
+  </header>
+
+  {% if page.translation_key %}{% assign translations = site.posts | where: 'translation_key', page.translation_key %}{% if translations.size > 1 %}<div class="translation-note"><span data-i18n="post.alsoAvailable">Also available:</span>{% for translated in translations %}{% if translated.url != page.url %}<a href="{{ translated.url | relative_url }}">{% if translated.lang == 'fa' %}فارسی{% else %}English{% endif %}</a>{% endif %}{% endfor %}</div>{% endif %}{% endif %}
+
+  {% if page.image %}<figure class="cover-media"><img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}" fetchpriority="high">{% if page.image_caption %}<figcaption>{{ page.image_caption }}</figcaption>{% endif %}</figure>{% endif %}
+
+  <div class="prose">{{ content }}</div>
+
+  {% if page.source_url %}<p class="source-line"><span data-i18n="post.source">Source / reference:</span> <a href="{{ page.source_url }}" rel="noopener">{{ page.source_url }}</a></p>{% endif %}
+
+  <section class="article-actions" aria-label="Article actions" data-i18n-aria="post.actions"><button class="quiet-button" type="button" data-share-title="{{ page.title | escape }}" data-share-url="{{ page.url | absolute_url }}" data-i18n="post.share">Share</button><button class="quiet-button" type="button" data-copy-url="{{ page.url | absolute_url }}" data-i18n="post.copyLink">Copy link</button><a class="quiet-button" href="{{ '/library/' | relative_url }}" data-i18n="post.library">Library</a></section>
+</article>

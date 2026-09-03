@@ -1,0 +1,67 @@
+title: north
+description: A bilingual English and Persian knowledge and publishing site for projects, articles, research, notes, media, and documentation.
+description_fa: یک سایت دو‌زبانه فارسی و انگلیسی برای پروژه‌ها، مقاله‌ها، پژوهش، یادداشت‌ها، رسانه و مستندات.
+
+# Production URL/base path are injected by the GitHub Pages workflow.
+url: ""
+baseurl: ""
+
+default_lang: en
+languages: [en, fa]
+timezone: Europe/Bucharest
+
+# Public identity/content personalization lives in _data/profile.json.
+profile_data: "_data/profile.json"
+
+author:
+  name: north
+
+project:
+  license: "Apache-2.0"
+  repository: "https://github.com/user9b09ef105a/NORTH"
+
+statement: "Find what matters. Keep what matters."
+statement_fa: "آنچه مهم است پیدا کن؛ آنچه ارزش دارد نگه دار."
+
+permalink: /:year/:month/:day/:title/
+show_excerpts: true
+markdown: kramdown
+highlighter: rouge
+strict_front_matter: true
+
+header_pages:
+  - library.md
+  - topics.md
+  - projects.md
+  - archive.md
+  - about.md
+
+links:
+  github: "https://github.com/user9b09ef105a/NORTH"
+  linkedin: ""
+  x: ""
+
+social_image: "/assets/brand/north-social-card.jpg"
+
+content_defaults:
+  domain: general
+  nature: analysis
+  media_type: text
+
+media_policy:
+  warn_file_mb: 10
+  max_local_file_mb: 50
+  warn_total_media_mb: 500
+  target_site_max_mb: 900
+
+exclude:
+  - README.md
+  - LICENSE
+  - CONTRIBUTING.md
+  - docs
+  - Gemfile
+  - Gemfile.lock
+  - scripts
+  - vendor
+  - .github
+  - .vscode

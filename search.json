@@ -1,0 +1,8 @@
+---
+layout: null
+permalink: /search.json
+sitemap: false
+---
+[
+{% for post in site.posts %}{"title":{{ post.title | jsonify }},"summary":{{ post.summary | default: post.excerpt | strip_html | normalize_whitespace | jsonify }},"url":{{ post.url | relative_url | jsonify }},"date":{{ post.date | date_to_xmlschema | jsonify }},"lang":{{ post.lang | default: site.default_lang | jsonify }},"kind":{{ post.kind | default: 'post' | jsonify }},"domain":{{ post.domain | default: site.content_defaults.domain | jsonify }},"nature":{{ post.nature | default: site.content_defaults.nature | jsonify }},"media":{{ post.media_type | default: site.content_defaults.media_type | jsonify }},"tags":{{ post.tags | jsonify }}}{% unless forloop.last %},{% endunless %}
+{% endfor %}]

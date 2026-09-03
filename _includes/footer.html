@@ -1,0 +1,13 @@
+{% assign profile = site.data.profile %}
+<footer class="site-footer">
+  <div class="wide-shell footer-row">
+    <div>© {{ site.time | date: '%Y' }} {{ profile.name | default: site.author.name | escape }} · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></div>
+    <div class="footer-links">
+      {% assign profile_links = profile.links | default: site.links %}
+      {% if profile_links.github != "" %}<a href="{{ profile_links.github }}" rel="me noopener">GitHub</a>{% endif %}
+      {% if profile_links.linkedin != "" %}<a href="{{ profile_links.linkedin }}" rel="me noopener">LinkedIn</a>{% endif %}
+      {% if profile_links.x != "" %}<a href="{{ profile_links.x }}" rel="me noopener">X</a>{% endif %}
+      <span class="footer-mark" data-i18n="footer.mark">public knowledge / static by design</span>
+    </div>
+  </div>
+</footer>

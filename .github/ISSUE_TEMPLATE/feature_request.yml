@@ -1,0 +1,29 @@
+name: Feature request
+description: Propose a focused improvement to NORTH.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user/project need should NORTH address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed direction
+      description: Describe the behavior or architecture you recommend.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other approaches did you consider?
+  - type: textarea
+    id: impact
+    attributes:
+      label: Compatibility and impact
+      description: Note UI, bilingual/RTL, performance, data lifecycle, accessibility, or migration implications.

@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<article class="article page-article shell">
+  <header class="article-header page-header">
+    {% if page.eyebrow %}<p class="eyebrow" data-localized-en="{{ page.eyebrow | escape }}" data-localized-fa="{{ page.eyebrow_fa | default: page.eyebrow | escape }}">{{ page.eyebrow }}</p>{% endif %}
+    <h1 data-localized-en="{{ page.title | escape }}" data-localized-fa="{{ page.title_fa | default: page.title | escape }}">{{ page.title | escape }}</h1>
+    {% if page.summary %}<p class="article-summary" data-localized-en="{{ page.summary | escape }}" data-localized-fa="{{ page.summary_fa | default: page.summary | escape }}">{{ page.summary | escape }}</p>{% endif %}
+  </header>
+  <div class="prose page-prose">{{ content }}</div>
+</article>

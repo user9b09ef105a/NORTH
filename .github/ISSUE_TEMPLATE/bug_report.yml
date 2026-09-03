@@ -1,0 +1,49 @@
+name: Bug report
+description: Report a reproducible NORTH defect.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve NORTH. Remove credentials, private data, or other sensitive information before posting.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is wrong and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Provide the smallest reliable sequence that reproduces the problem.
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: NORTH version or commit
+      placeholder: v1.0.0 or commit SHA
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser, device/viewport, Ruby/Jekyll version, or other relevant context.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs, screenshots, or additional evidence
+      description: Remove secrets and private data before posting.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety check
+      options:
+        - label: I have not included secrets, credentials, private data, or other sensitive information.
+          required: true

@@ -1,0 +1,48 @@
+{
+  "schema": "north-source-ownership/v1",
+  "data_paths": [
+    "_posts",
+    "_drafts",
+    "assets/media",
+    "_data/profile.json"
+  ],
+  "source_dirs": [
+    ".github",
+    ".vscode",
+    "_includes",
+    "_layouts",
+    "_sample-data",
+    "assets/brand",
+    "assets/css",
+    "assets/js",
+    "docs",
+    "scripts"
+  ],
+  "source_files": [
+    ".gitignore",
+    ".gitattributes",
+    "404.html",
+    "Gemfile",
+    "README.md",
+    "_config.yml",
+    "_data/taxonomy.yml",
+    "about.md",
+    "archive.md",
+    "feed-en.xml",
+    "feed-fa.xml",
+    "feed.xml",
+    "index.md",
+    "library.md",
+    "notes.md",
+    "projects.md",
+    "search.json",
+    "search.md",
+    "sitemap.xml",
+    "topics.md",
+    "north.version.json",
+    "north.ownership.json",
+    "_data/profile.example.json",
+    "LICENSE",
+    "CONTRIBUTING.md"
+  ]
+}

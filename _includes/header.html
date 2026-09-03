@@ -1,0 +1,142 @@
+{% assign en_translation = nil %}
+{% assign fa_translation = nil %}
+{% if page.translation_key %}
+  {% assign translation_group = site.posts | where: 'translation_key', page.translation_key %}
+  {% assign en_translation = translation_group | where: 'lang', 'en' | first %}
+  {% assign fa_translation = translation_group | where: 'lang', 'fa' | first %}
+{% endif %}
+{% assign current_nav_key = 'home' %}
+{% assign current_nav_title = 'north.' %}
+{% for path in site.header_pages %}
+  {% assign current_item = site.pages | where: 'path', path | first %}
+  {% if current_item and page.url == current_item.url %}
+    {% assign current_nav_key = current_item.nav_key | default: current_item.title | downcase %}
+    {% assign current_nav_title = current_item.nav_title | default: current_item.title %}
+  {% endif %}
+{% endfor %}
+
+<header class="site-dock-shell adaptive-navigation" data-adaptive-navigation>
+  <!-- Signature NORTH rail: used only when the viewport has enough width AND height. -->
+  <aside class="site-dock nav-rail" aria-label="NORTH command rail">
+    <a class="dock-brand" href="{{ '/' | relative_url }}" aria-label="north home" data-dock-label="north.">
+      <img src="{{ '/assets/brand/north-profile.webp' | relative_url }}" alt="" width="38" height="38">
+      <span class="dock-pulse" aria-hidden="true"></span>
+    </a>
+
+    <nav class="dock-nav" aria-label="Primary navigation" data-i18n-aria="nav.primary">
+      {% for path in site.header_pages %}
+        {% assign item = site.pages | where: 'path', path | first %}
+        {% if item %}
+          {% assign key = item.nav_key | default: item.title | downcase %}
+          <a class="dock-action" href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %} data-dock-label="{{ item.nav_title | default: item.title | downcase }}">
+            <span class="dock-icon" aria-hidden="true">{% include nav-icon.html key=key %}</span>
+            <span class="dock-label" data-i18n="nav.{{ key }}">{{ item.nav_title | default: item.title | downcase }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+
+    <div class="dock-controls">
+      <div class="theme-switch dock-switch" role="group" aria-label="Theme" data-i18n-aria="theme.label">
+        <button type="button" data-theme-switch="ocean" title="Ocean" aria-label="Ocean theme" data-dock-label="Ocean"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2"/><path d="M3 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2"/></svg></button>
+        <button type="button" data-theme-switch="light" title="Mist" aria-label="Mist theme" data-dock-label="Mist"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="3.5"/><path d="M12 2.5V4M4.5 10H3M21 10h-1.5M6.7 4.7 5.6 3.6M17.3 4.7l1.1-1.1M5 17h14M7 20h10"/></svg></button>
+      </div>
+      <div class="language-switch dock-language smart-language-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+        <button type="button" data-language-switch="en" aria-label="English" title="English"{% if en_translation %} data-translation-url="{{ en_translation.url | relative_url }}"{% endif %}>EN</button>
+        <button type="button" data-language-switch="fa" aria-label="فارسی" title="فارسی"{% if fa_translation %} data-translation-url="{{ fa_translation.url | relative_url }}"{% endif %}>فا</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Standard adaptive top navigation for laptops, tablets and short-height desktops. -->
+  <div class="adaptive-topbar" data-top-navigation>
+    <div class="adaptive-topbar-inner">
+      <a class="adaptive-brand" href="{{ '/' | relative_url }}" aria-label="north home">
+        <img src="{{ '/assets/brand/north-profile.webp' | relative_url }}" alt="" width="34" height="34">
+        <span>north<span class="brand-dot">.</span></span>
+      </a>
+
+      <nav class="adaptive-nav-links" aria-label="Primary navigation" data-i18n-aria="nav.primary">
+        {% for path in site.header_pages %}
+          {% assign item = site.pages | where: 'path', path | first %}
+          {% if item %}
+            {% assign key = item.nav_key | default: item.title | downcase %}
+            <a class="adaptive-nav-link" href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %} title="{{ item.nav_title | default: item.title }}">
+              <span class="adaptive-nav-icon" aria-hidden="true">{% include nav-icon.html key=key %}</span>
+              <span class="adaptive-nav-text" data-i18n="nav.{{ key }}">{{ item.nav_title | default: item.title | downcase }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+
+      <div class="adaptive-topbar-controls">
+        <div class="theme-switch topbar-theme-switch" role="group" aria-label="Theme" data-i18n-aria="theme.label">
+          <button type="button" data-theme-switch="ocean" title="Ocean" aria-label="Ocean theme"><span aria-hidden="true">◈</span></button>
+          <button type="button" data-theme-switch="light" title="Mist" aria-label="Mist theme"><span aria-hidden="true">○</span></button>
+        </div>
+        <div class="language-switch topbar-language-switch smart-language-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" data-language-switch="en" aria-label="English" title="English"{% if en_translation %} data-translation-url="{{ en_translation.url | relative_url }}"{% endif %}>EN</button>
+          <button type="button" data-language-switch="fa" aria-label="فارسی" title="فارسی"{% if fa_translation %} data-translation-url="{{ fa_translation.url | relative_url }}"{% endif %}>فا</button>
+        </div>
+      </div>
+
+      <div class="mobile-current-section" aria-hidden="true">
+        <span class="mobile-current-icon">{% include nav-icon.html key=current_nav_key %}</span>
+        <span data-i18n="nav.{{ current_nav_key }}">{{ current_nav_title }}</span>
+      </div>
+
+      <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="north-mobile-menu" data-mobile-menu-toggle data-i18n-aria="nav.menu">
+        <span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span>
+        <span class="sr-only" data-i18n="nav.menu">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile navigation becomes a familiar app/menu sheet instead of forcing the rail/dock pattern. -->
+  <div class="mobile-menu-layer" data-mobile-menu-layer aria-hidden="true">
+    <button class="mobile-menu-backdrop" type="button" tabindex="-1" aria-label="Close menu" data-mobile-menu-close data-i18n-aria="nav.close"></button>
+    <aside class="mobile-menu-panel" id="north-mobile-menu" role="dialog" aria-modal="true" aria-label="Primary navigation" data-i18n-aria="nav.primary">
+      <div class="mobile-menu-head">
+        <a class="adaptive-brand" href="{{ '/' | relative_url }}">
+          <img src="{{ '/assets/brand/north-profile.webp' | relative_url }}" alt="" width="34" height="34">
+          <span>north<span class="brand-dot">.</span></span>
+        </a>
+        <button class="mobile-menu-close" type="button" data-mobile-menu-close aria-label="Close menu" data-i18n-aria="nav.close"><span aria-hidden="true">×</span></button>
+      </div>
+
+      <nav class="mobile-menu-nav" aria-label="Primary navigation" data-i18n-aria="nav.primary">
+        <a class="mobile-menu-link" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>
+          <span class="mobile-menu-icon" aria-hidden="true">{% include nav-icon.html key='home' %}</span>
+          <span data-i18n="nav.home">home</span><span class="mobile-menu-arrow" aria-hidden="true">→</span>
+        </a>
+        {% for path in site.header_pages %}
+          {% assign item = site.pages | where: 'path', path | first %}
+          {% if item %}
+            {% assign key = item.nav_key | default: item.title | downcase %}
+            <a class="mobile-menu-link" href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>
+              <span class="mobile-menu-icon" aria-hidden="true">{% include nav-icon.html key=key %}</span>
+              <span data-i18n="nav.{{ key }}">{{ item.nav_title | default: item.title | downcase }}</span><span class="mobile-menu-arrow" aria-hidden="true">→</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+
+      <div class="mobile-menu-settings">
+        <div class="mobile-menu-setting">
+          <span data-i18n="theme.label">Theme</span>
+          <div class="theme-switch mobile-theme-switch" role="group" aria-label="Theme" data-i18n-aria="theme.label">
+            <button type="button" data-theme-switch="ocean">Ocean</button>
+            <button type="button" data-theme-switch="light">Mist</button>
+          </div>
+        </div>
+        <div class="mobile-menu-setting">
+          <span data-i18n="lang.label">Language</span>
+          <div class="language-switch mobile-language-switch smart-language-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+            <button type="button" data-language-switch="en" aria-label="English" title="English"{% if en_translation %} data-translation-url="{{ en_translation.url | relative_url }}"{% endif %}>EN</button>
+            <button type="button" data-language-switch="fa" aria-label="فارسی" title="فارسی"{% if fa_translation %} data-translation-url="{{ fa_translation.url | relative_url }}"{% endif %}>فا</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</header>

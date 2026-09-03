@@ -1,0 +1,10 @@
+---
+layout: null
+permalink: /sitemap.xml
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{% for post in site.posts %}<url><loc>{{ post.url | absolute_url | xml_escape }}</loc><lastmod>{% if post.updated %}{{ post.updated | date_to_xmlschema }}{% else %}{{ post.date | date_to_xmlschema }}{% endif %}</lastmod>{% if post.translation_key %}{% assign group = site.posts | where: 'translation_key', post.translation_key %}{% for translated in group %}<xhtml:link rel="alternate" hreflang="{{ translated.lang }}" href="{{ translated.url | absolute_url | xml_escape }}"/>{% endfor %}{% endif %}</url>{% endfor %}
+{% for p in site.pages %}{% if p.sitemap != false %}<url><loc>{{ p.url | absolute_url | xml_escape }}</loc></url>{% endif %}{% endfor %}
+</urlset>

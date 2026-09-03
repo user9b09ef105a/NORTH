@@ -1,0 +1,99 @@
+name: Deploy NORTH to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Run NORTH source checks
+        shell: pwsh
+        run: ./scripts/check.ps1
+
+      - name: Setup Ruby
+        # Pinned to the full SHA used by GitHub's official Jekyll Pages starter workflow.
+        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Create production URL config
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > _config.production.yml <<EOF
+          url: "${{ steps.pages.outputs.origin }}"
+          baseurl: "${{ steps.pages.outputs.base_path }}"
+          EOF
+
+      - name: Build NORTH
+        run: bundle exec jekyll build --config _config.yml,_config.production.yml --strict_front_matter
+        env:
+          JEKYLL_ENV: production
+
+      - name: Verify generated site
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_PATH="${{ steps.pages.outputs.base_path }}"
+          test -f _site/index.html
+          test -f _site/assets/css/main.css
+          test -f _site/assets/js/site.js
+          test -f _site/library/index.html
+          test -f _site/archive/index.html
+          test -f _site/topics/index.html
+          test -f _site/projects/index.html
+          test -f _site/search/index.html
+          test -f _site/search.json
+          test -f _site/feed.xml
+          test -f _site/sitemap.xml
+          grep -F "${BASE_PATH}/assets/css/main.css" _site/index.html
+          grep -F "${BASE_PATH}/library/" _site/index.html
+          grep -F "${BASE_PATH}/archive/" _site/index.html
+          grep -F "rel=\"canonical\"" _site/index.html
+          grep -F "${{ steps.pages.outputs.origin }}${BASE_PATH}/" _site/sitemap.xml
+          test -f _site/feed-en.xml
+          test -f _site/feed-fa.xml
+          grep -F 'data-language-switch="fa"' _site/index.html
+          SITE_BYTES=$(du -sb _site | cut -f1)
+          MAX_BYTES=$((900 * 1024 * 1024))
+          echo "Generated site size: $((SITE_BYTES / 1024 / 1024)) MB"
+          if [ "$SITE_BYTES" -gt "$MAX_BYTES" ]; then echo "Generated site exceeds NORTH 900 MB safety target."; exit 1; fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./_site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

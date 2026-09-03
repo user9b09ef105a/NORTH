@@ -1,0 +1,612 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NORTH: First GitHub setup",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\setup-github.ps1",
+        "-Owner",
+        "user9b09ef105a",
+        "-Repo",
+        "NORTH"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Test PowerShell scripts",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\test-powershell.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: New content",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\new-content.ps1",
+        "-Type",
+        "${input:contentType}",
+        "-Lang",
+        "${input:contentLang}",
+        "-Domain",
+        "${input:contentDomain}",
+        "-Nature",
+        "${input:contentNature}",
+        "-MediaType",
+        "${input:mediaType}",
+        "-Slug",
+        "${input:contentSlug}",
+        "-TranslationKey",
+        "${input:translationKey}",
+        "-Title",
+        "${input:contentTitle}",
+        "-Tags",
+        "${input:contentTags}",
+        "-Summary",
+        "${input:contentSummary}",
+        "-Open"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: New article from Markdown file",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\new-content.ps1",
+        "-Type",
+        "${input:contentType}",
+        "-Lang",
+        "${input:contentLang}",
+        "-Domain",
+        "${input:contentDomain}",
+        "-Nature",
+        "${input:contentNature}",
+        "-Slug",
+        "${input:contentSlug}",
+        "-TranslationKey",
+        "${input:translationKey}",
+        "-Title",
+        "${input:contentTitle}",
+        "-Tags",
+        "${input:contentTags}",
+        "-Summary",
+        "${input:contentSummary}",
+        "-BodyFile",
+        "${input:bodyFilePath}",
+        "-Media",
+        "${input:mediaPath}",
+        "-Open"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Create + publish Markdown file",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\new-content.ps1",
+        "-Type",
+        "${input:contentType}",
+        "-Lang",
+        "${input:contentLang}",
+        "-Domain",
+        "${input:contentDomain}",
+        "-Nature",
+        "${input:contentNature}",
+        "-Slug",
+        "${input:contentSlug}",
+        "-TranslationKey",
+        "${input:translationKey}",
+        "-Title",
+        "${input:contentTitle}",
+        "-Tags",
+        "${input:contentTags}",
+        "-Summary",
+        "${input:contentSummary}",
+        "-BodyFile",
+        "${input:bodyFilePath}",
+        "-Media",
+        "${input:mediaPath}",
+        "-Publish",
+        "-PublishMessage",
+        "${input:commitMessage}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: New media content",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\new-content.ps1",
+        "-Type",
+        "${input:mediaContentType}",
+        "-Lang",
+        "${input:contentLang}",
+        "-Domain",
+        "${input:contentDomain}",
+        "-Nature",
+        "${input:contentNature}",
+        "-Slug",
+        "${input:contentSlug}",
+        "-TranslationKey",
+        "${input:translationKey}",
+        "-Title",
+        "${input:contentTitle}",
+        "-Tags",
+        "${input:contentTags}",
+        "-Summary",
+        "${input:contentSummary}",
+        "-Media",
+        "${input:mediaPath}",
+        "-Open"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: New draft",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\new-content.ps1",
+        "-Type",
+        "${input:contentType}",
+        "-Lang",
+        "${input:contentLang}",
+        "-Domain",
+        "${input:contentDomain}",
+        "-Nature",
+        "${input:contentNature}",
+        "-MediaType",
+        "${input:mediaType}",
+        "-Slug",
+        "${input:contentSlug}",
+        "-TranslationKey",
+        "${input:translationKey}",
+        "-Title",
+        "${input:contentTitle}",
+        "-Tags",
+        "${input:contentTags}",
+        "-Summary",
+        "${input:contentSummary}",
+        "-Draft",
+        "-Open"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Publish draft",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\publish-draft.ps1",
+        "-Draft",
+        "${input:draftName}",
+        "-Open"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Check",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\check.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Content report",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\content-report.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Performance report",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\performance-report.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Media report",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\media-report.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Preview locally",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\preview.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Publish (protected PR)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\publish.ps1",
+        "-Message",
+        "${input:commitMessage}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Diagnose Pages",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\diagnose-pages.ps1",
+        "-SiteUrl",
+        "${input:siteUrl}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Data status",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\data-status.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Backup data",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\backup-data.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Export data pack",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\export-data.ps1",
+        "-Destination",
+        "${input:dataPackDestination}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Import data pack",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\import-data.ps1",
+        "-Pack",
+        "${input:dataPackPath}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Restore latest backup",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\restore-data.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Create clean source ZIP",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\create-clean-source.ps1",
+        "-Destination",
+        "${input:cleanSourceDestination}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Create upgrade workspace",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\new-upgrade-workspace.ps1",
+        "-Destination",
+        "${input:upgradeWorkspacePath}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Apply source update",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\apply-source-update.ps1",
+        "-Workspace",
+        "${input:upgradeWorkspacePath}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Initialize profile data",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\init-profile.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "NORTH: Verify data pack",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\verify-data-pack.ps1",
+        "-Pack",
+        "${input:dataPackPath}"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "contentType",
+      "type": "pickString",
+      "description": "Content type",
+      "options": [
+        "post",
+        "project",
+        "note",
+        "signal",
+        "image",
+        "audio",
+        "video",
+        "document",
+        "tweet"
+      ],
+      "default": "post"
+    },
+    {
+      "id": "mediaContentType",
+      "type": "pickString",
+      "description": "Media content type",
+      "options": [
+        "image",
+        "audio",
+        "video",
+        "document",
+        "tweet"
+      ],
+      "default": "image"
+    },
+    {
+      "id": "contentLang",
+      "type": "pickString",
+      "description": "Content language / زبان محتوا",
+      "options": [
+        "en",
+        "fa"
+      ],
+      "default": "en"
+    },
+    {
+      "id": "contentDomain",
+      "type": "pickString",
+      "description": "Domain / حوزه",
+      "options": [
+        "software",
+        "architecture",
+        "ai",
+        "systems",
+        "research",
+        "product",
+        "design",
+        "business",
+        "career",
+        "knowledge",
+        "general"
+      ],
+      "default": "general"
+    },
+    {
+      "id": "contentNature",
+      "type": "pickString",
+      "description": "Nature / ماهیت",
+      "options": [
+        "analysis",
+        "guide",
+        "research",
+        "case-study",
+        "build-log",
+        "reference",
+        "opinion",
+        "learning",
+        "journal",
+        "announcement"
+      ],
+      "default": "analysis"
+    },
+    {
+      "id": "mediaType",
+      "type": "pickString",
+      "description": "Media type (usually text for normal content)",
+      "options": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "document",
+        "link",
+        "mixed"
+      ],
+      "default": "text"
+    },
+    {
+      "id": "contentTitle",
+      "type": "promptString",
+      "description": "Title"
+    },
+    {
+      "id": "contentSlug",
+      "type": "promptString",
+      "description": "Optional URL slug (ASCII; useful for Persian titles)",
+      "default": ""
+    },
+    {
+      "id": "translationKey",
+      "type": "promptString",
+      "description": "Optional translation key shared by EN/FA versions",
+      "default": ""
+    },
+    {
+      "id": "contentTags",
+      "type": "promptString",
+      "description": "Tags (comma separated)",
+      "default": ""
+    },
+    {
+      "id": "contentSummary",
+      "type": "promptString",
+      "description": "Short public summary",
+      "default": ""
+    },
+    {
+      "id": "mediaPath",
+      "type": "promptString",
+      "description": "Local file path or public URL"
+    },
+    {
+      "id": "draftName",
+      "type": "promptString",
+      "description": "Draft filename, e.g. draft-idea.md"
+    },
+    {
+      "id": "commitMessage",
+      "type": "promptString",
+      "description": "Git commit message",
+      "default": "publish: update north"
+    },
+    {
+      "id": "siteUrl",
+      "type": "promptString",
+      "description": "Live Pages URL, e.g. https://USER.github.io/north"
+    },
+    {
+      "id": "dataPackDestination",
+      "type": "promptString",
+      "description": "Optional output ZIP path. Leave blank for .north/exports default.",
+      "default": ""
+    },
+    {
+      "id": "dataPackPath",
+      "type": "promptString",
+      "description": "NORTH data pack ZIP path to import"
+    },
+    {
+      "id": "cleanSourceDestination",
+      "type": "promptString",
+      "description": "Optional clean source ZIP path. Leave blank for .north/exports default.",
+      "default": ""
+    },
+    {
+      "id": "upgradeWorkspacePath",
+      "type": "promptString",
+      "description": "Upgrade workspace folder path. Leave blank when creating to use a sibling timestamped folder.",
+      "default": ""
+    },
+    {
+      "id": "bodyFilePath",
+      "type": "promptString",
+      "description": "Existing Markdown/text body file path"
+    }
+  ]
+}

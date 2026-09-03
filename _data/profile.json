@@ -1,0 +1,14 @@
+{
+  "name": "north",
+  "description_en": "A bilingual English and Persian knowledge and work journal for projects, articles, research, notes, media, and documentation.",
+  "description_fa": "یک ژورنال دو‌زبانه فارسی و انگلیسی برای پروژه‌ها، مقاله‌ها، پژوهش، یادداشت‌ها، رسانه و مستندات.",
+  "statement_en": "Find what matters. Keep what matters.",
+  "statement_fa": "آنچه مهم است پیدا کن؛ آنچه ارزش دارد نگه دار.",
+  "links": {
+    "github": "https://github.com/user9b09ef105a/NORTH",
+    "linkedin": "",
+    "x": ""
+  },
+  "about_en": "NORTH is my public knowledge and work journal. I use it for projects, articles, research, notes, media, references, and documentation.\n\nThe Library keeps published material searchable by domain, nature, content type, media type, tags, and time.",
+  "about_fa": "NORTH ژورنال عمومی دانش و کار من است؛ برای پروژه‌ها، مقاله‌ها، پژوهش، یادداشت‌ها، رسانه، منابع و مستندات.\n\nکتابخانه محتوای منتشرشده را بر اساس حوزه، ماهیت، نوع محتوا، نوع رسانه، برچسب و زمان قابل جستجو نگه می‌دارد."
+}

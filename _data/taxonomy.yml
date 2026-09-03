@@ -1,0 +1,118 @@
+domains:
+  - id: software
+    en: Software Engineering
+    fa: مهندسی نرم‌افزار
+  - id: architecture
+    en: Architecture
+    fa: معماری
+  - id: ai
+    en: AI / ML
+    fa: هوش مصنوعی / یادگیری ماشین
+  - id: systems
+    en: Systems / Infrastructure
+    fa: سیستم‌ها / زیرساخت
+  - id: research
+    en: Research
+    fa: پژوهش
+  - id: product
+    en: Product / Platform
+    fa: محصول / پلتفرم
+  - id: design
+    en: Design / UX
+    fa: طراحی / تجربه کاربری
+  - id: business
+    en: Business / Strategy
+    fa: کسب‌وکار / استراتژی
+  - id: career
+    en: Career / Work
+    fa: مسیر حرفه‌ای / کار
+  - id: knowledge
+    en: Knowledge / Learning
+    fa: دانش / یادگیری
+  - id: general
+    en: General
+    fa: عمومی
+
+natures:
+  - id: analysis
+    en: Analysis
+    fa: تحلیل
+  - id: guide
+    en: Guide / How-to
+    fa: راهنما / آموزش
+  - id: research
+    en: Research
+    fa: پژوهش
+  - id: case-study
+    en: Case Study
+    fa: مطالعه موردی
+  - id: build-log
+    en: Build Log
+    fa: گزارش ساخت
+  - id: reference
+    en: Reference
+    fa: مرجع
+  - id: opinion
+    en: Perspective
+    fa: دیدگاه
+  - id: learning
+    en: Learning Note
+    fa: یادداشت یادگیری
+  - id: journal
+    en: Journal / Log
+    fa: ژورنال / ثبت
+  - id: announcement
+    en: Announcement
+    fa: اعلام / خبر
+
+kinds:
+  - id: post
+    en: Article
+    fa: مقاله
+  - id: project
+    en: Project
+    fa: پروژه
+  - id: note
+    en: Note
+    fa: یادداشت
+  - id: signal
+    en: Signal
+    fa: سیگنال
+  - id: image
+    en: Image
+    fa: تصویر
+  - id: audio
+    en: Audio
+    fa: صوت
+  - id: video
+    en: Video
+    fa: ویدئو
+  - id: document
+    en: Document
+    fa: سند
+  - id: tweet
+    en: Reference / Social
+    fa: مرجع / شبکه اجتماعی
+
+media_types:
+  - id: text
+    en: Text
+    fa: متن
+  - id: image
+    en: Image
+    fa: تصویر
+  - id: audio
+    en: Audio
+    fa: صوت
+  - id: video
+    en: Video
+    fa: ویدئو
+  - id: document
+    en: Document
+    fa: سند
+  - id: link
+    en: External Link
+    fa: لینک خارجی
+  - id: mixed
+    en: Mixed Media
+    fa: چندرسانه‌ای

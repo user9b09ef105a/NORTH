@@ -1,0 +1,26 @@
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/
+Gemfile.lock
+_config.production.yml
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local author drafts: never push them to the public repository.
+_drafts/*
+!_drafts/.gitkeep
+
+# NORTH local lifecycle workspace: backups, exports, temp, upgrade workspaces/state.
+.north/
+
+# Portable data/source packs generated locally should not be committed accidentally.
+NORTH_Data_*.zip
+NORTH_Clean_Source_*.zip

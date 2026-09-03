@@ -1,0 +1,59 @@
+---
+layout: default
+---
+{% assign profile = site.data.profile %}
+<section class="north-hero wide-shell">
+  <div class="north-hero-copy">
+    <div class="north-sigil-stage" aria-label="NORTH strategic systems signature">
+      <div class="north-strategy-sigil" data-north-sigil>
+        <span class="north-sigil-code" data-glyph="➒⎈♘⚒︎>_⌬">➒⎈♘⚒︎&gt;_⌬</span>
+      </div>
+      <div class="north-wave-terminal" aria-hidden="true">
+        <span class="north-wave north-wave-a">🌊</span>
+        <span class="north-wave north-wave-b">🌊</span>
+        <span class="north-wave-cursor"></span>
+      </div>
+    </div>
+    <p class="eyebrow" data-i18n="home.eyebrow">KNOWLEDGE & WORK</p>
+    <h1 data-i18n-html="home.title">Find what matters.<br>Keep what matters.</h1>
+    <p class="hero-copy" data-i18n="home.copy">A bilingual public knowledge system for articles, projects, research, notes, media, and the work behind them.</p>
+    <div class="hero-actions">
+      <a class="button" href="{{ '/library/' | relative_url }}" data-i18n="home.library">Explore the library</a>
+      <a class="button ghost" href="{{ '/projects/' | relative_url }}" data-i18n="home.projects">Selected projects</a>
+    </div>
+    <p class="statement"><span data-lang-copy="en">{{ profile.statement_en | default: site.statement }}</span><span data-lang-copy="fa">{{ profile.statement_fa | default: site.statement_fa }}</span></p>
+  </div>
+  <div class="north-hero-art"><img src="{{ '/assets/brand/north-banner.webp' | relative_url }}" alt="NORTH ocean intelligence visual" width="1440" height="810" loading="eager" decoding="async" fetchpriority="high"></div>
+</section>
+
+<section class="quick-discover wide-shell">
+  <div class="section-heading">
+    <div><p class="eyebrow" data-i18n="home.discoverEyebrow">DISCOVER</p><h2 data-i18n="home.discover">Navigate knowledge by structure, not noise.</h2></div>
+  </div>
+  <div class="discover-grid">
+    <a class="discover-card" href="{{ '/library/' | relative_url }}?sort=newest"><span>01</span><strong data-i18n="home.newest">Newest first</strong><small data-i18n="home.newestCopy">Today, week, month, year, or custom date range.</small></a>
+    <a class="discover-card" href="{{ '/library/' | relative_url }}#filters"><span>02</span><strong data-i18n="home.domain">By domain & nature</strong><small data-i18n="home.domainCopy">Software, AI, systems, research, guides, case studies, and more.</small></a>
+    <a class="discover-card" href="{{ '/library/' | relative_url }}#filters"><span>03</span><strong data-i18n="home.type">By content & media</strong><small data-i18n="home.typeCopy">Articles, projects, notes, images, audio, video, documents, references.</small></a>
+    <a class="discover-card" href="{{ '/library/' | relative_url }}#filters"><span>04</span><strong data-i18n="home.search">Search everything</strong><small data-i18n="home.searchCopy">Search title, summary, tags, domain, nature, and media.</small></a>
+  </div>
+</section>
+
+{% assign featured_posts = site.posts | where: 'featured', true %}
+{% if featured_posts.size > 0 %}
+<section class="feed shell" aria-labelledby="featured-heading">
+  <div class="section-heading"><h2 id="featured-heading" data-i18n="home.featured">Featured</h2></div>
+  <div class="post-list" data-lang-list>{% for post in featured_posts limit: 8 %}{% include post-row.html post=post %}{% endfor %}</div>
+  <p class="empty" data-lang-empty hidden data-i18n="empty.language">No entries in this language yet.</p>
+</section>
+{% endif %}
+
+<section class="feed shell" aria-labelledby="latest-heading">
+  <div class="section-heading">
+    <h2 id="latest-heading" data-i18n="home.latest">Latest</h2>
+    <a href="{{ '/library/' | relative_url }}?sort=newest" data-i18n="home.viewAll">View all →</a>
+  </div>
+  {% if site.posts.size > 0 %}
+    <div class="post-list" data-lang-list>{% for post in site.posts limit: 16 %}{% include post-row.html post=post %}{% endfor %}</div>
+    <p class="empty" data-lang-empty hidden data-i18n="empty.language">No entries in this language yet.</p>
+  {% else %}<p class="empty" data-i18n="empty.published">No published entries yet.</p>{% endif %}
+</section>

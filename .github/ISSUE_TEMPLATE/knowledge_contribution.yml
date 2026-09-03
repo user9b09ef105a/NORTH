@@ -1,0 +1,37 @@
+name: Knowledge/content proposal
+description: Propose a research, reference, taxonomy, translation, or public-knowledge contribution.
+title: "[Knowledge]: "
+labels: ["content"]
+body:
+  - type: textarea
+    id: contribution
+    attributes:
+      label: Contribution
+      description: What knowledge or content should be added or improved?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources and evidence
+      description: List the primary sources, references, or original work supporting the contribution.
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options:
+        - English
+        - Persian
+        - English + Persian
+        - Language-independent
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Rights and attribution
+      options:
+        - label: I have the right to submit this material and will provide required attribution/licensing information.
+          required: true
