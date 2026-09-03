@@ -80,7 +80,7 @@ jobs:
           if [ "$SITE_BYTES" -gt "$MAX_BYTES" ]; then echo "Generated site exceeds NORTH 900 MB safety target."; exit 1; fi
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./_site
 
